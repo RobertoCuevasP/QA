@@ -1,7 +1,10 @@
 package ejercicio2Test;
 
+import ejercicio2.CalcularHoraFecha;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import org.junit.Assert;
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,20 +12,22 @@ import java.util.List;
 @RunWith(value= Parameterized.class)
 public class CalcularHoraFechaTest {
 
-    private int dia;
-    private String mes;
+    private int day;
+    private String month;
     private int year;
     private int hour;
-    private int minute;
-    private int second;
+    private int min;
+    private int sec;
+    private String expectedResult;
 
-    public CalcularHoraFechaTest(int dia, String mes, int year, int hour, int minute, int second){
-        this.dia = dia;
-        this.mes = mes;
+    public CalcularHoraFechaTest(int day, String month, int year, int hour, int min, int sec, String expectedResult){
+        this.day = day;
+        this.month = month;
         this.year = year;
         this.hour = hour;
-        this.minute = minute;
-        this.second = second;
+        this.min = min;
+        this.sec = sec;
+        this.expectedResult = expectedResult;
     }
 
     @Parameterized.Parameters
@@ -51,4 +56,12 @@ public class CalcularHoraFechaTest {
     }
 
 
+    @Test
+    public void verify_hora_fecha(){
+
+        CalcularHoraFecha calculaHoraFecha = new CalcularHoraFecha();
+        String actualResult= calculaHoraFecha.CalcularFecha(this.day, this.month, this.year, this.hour, this.min, this.sec);
+        Assert.assertEquals("ERROR! ",this.expectedResult,actualResult);
+
+    }
 }
